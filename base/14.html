@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>钟表</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var ctx
+
+  function init () {
+    var canvas = document.getElementById('canvas')
+    ctx = canvas.getContext('2d')
+    draw()
+  }
+
+  init()
+
+  function draw () {
+    requestAnimationFrame(function step(){
+      drawDial() //绘制表盘
+      drawAllHands() //绘制时分秒针
+      requestAnimationFrame(step)
+    })
+  }
+
+  // 思路：绘制表盘、绘制时分秒针
+  function drawDial () {
+    ctx.clearRect(0, 0, 400, 400) //清除所有内容
+    ctx.save()
+
+    ctx.translate(200, 200)
+
+    // 绘制圆周 
+    ctx.beginPath()
+    ctx.arc(0, 0, 180, 0, Math.PI * 2)
+    ctx.stroke()
+    ctx.closePath()
+
+    // 绘制刻度
+    for (let i = 0; i < 60; i++) {
+      ctx.save()
+      // Math.PI / 2中轴，Math.PI对应30，每一个就是i * Math.PI / 30
+      ctx.rotate(Math.PI / 2 + (i * Math.PI / 30))
+      
+      ctx.beginPath()
+      ctx.moveTo(i % 5 ? 170 : 160, 0)
+      ctx.lineTo(180, 0)
+      ctx.lineWidth = 4
+      ctx.stroke()
+      ctx.closePath()
+      ctx.restore()
+    }
+    ctx.restore()
+  }
+
+  // 绘制时分秒针
+  function drawAllHands () {
+    let time = new Date()
+    let s = time.getSeconds()
+    let m = time.getMinutes()
+    let h = time.getHours()
+
+    // 360度对应60s, 1度对应6s
+    let sAngle = Math.PI / 180 * 6 * s
+    // 360度对应60min, 1度对应6min，但是还要加上秒针走的角度，1分钟/60s/
+    let mAngle = Math.PI / 180 * 6 * m + sAngle / 60
+    // 360度对应12h, 1度对应30min，但是还要加上秒分走的角度，360/30=12
+    let hAngle = Math.PI / 180 * 30 * h + mAngle / 12
+
+    drawHand(sAngle, 155, 3, 'black')
+    drawHand(mAngle, 140, 5, 'black')
+    drawHand(hAngle, 80, 7, 'black')
+  }
+
+  // 绘制表针
+  function drawHand (angle, len, width, color) {
+    ctx.save()
+    ctx.translate(200, 200)
+    ctx.rotate(-Math.PI / 2 + angle) // 旋转坐标轴。 x轴就是针的角度
+    ctx.beginPath()
+    ctx.moveTo(-4, 0)
+    ctx.lineTo(len, 0)
+    ctx.lineWidth = width
+    ctx.strokeStyle = color
+    ctx.lineCap = 'round'
+    ctx.stroke()
+    ctx.closePath()
+    ctx.restore()
+  }
+</script>

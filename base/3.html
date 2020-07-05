@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>绘制形状</title>
+</head>
+<body>
+  <canvas id="canvas" width="200" height="200" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
+  /*
+  * 1. fillRect(x, y, width, height)：绘制一个填充的矩形。
+  * 2. strokeRect(x, y, width, height)：绘制一个矩形的边框。
+  * 3. clearRect(x, y, widh, height)：清除指定的矩形区域。
+  */
+
+  // 绘制一个填充的矩形
+  ctx.fillRect(0, 0, 100, 100)
+  ctx.fillStyle = '#333333'
+
+  // 绘制一个矩形边框
+  ctx.strokeRect(100, 100, 50, 50)
+
+  // 清除指定区域
+  ctx.clearRect(50, 50, 50, 50)
+</script>

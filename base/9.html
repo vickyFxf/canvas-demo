@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>添加图片</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
+  
+  // 在canvas上绘制图片
+  var img = new Image()
+  img.src = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1593928762120&di=7fb0ab9de3bb8d473a965a26b316494f&imgtype=0&src=http%3A%2F%2Fdik.img.kttpdq.com%2Fpic%2F41%2F28150%2F8e1db4cfd39d7b99_320x480.jpg'
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0)
+    // ctx.drawImage(img, 0, 0, 400, 400) // 缩放图片
+    ctx.drawImage(img, 150, 180, 150, 50, 0, 0, 200, 100) // 切片 (150, 180, 150, 50)确定切片图片，（0, 0, 200, 100）放置切片位置
+  }
+
+  // 状态保存和恢复
+</script>

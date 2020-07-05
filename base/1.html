@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第一个canvas</title>
+</head>
+<body>
+  <!-- canvas只有两个属性width和height，默认为300*150，单位为px；如果用css定义canvas的宽高，那么可能比例回不一致，导致绘制的时候出现扭曲等问题，所以不要用css设置 -->
+  <canvas id="canvas" width="200" height="200"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas') // 找到canvas元素
+  if (!canvas.getContext) return // 检查浏览器是否支持
+  var ctx = canvas.getContext('2d') // 创建context对象
+  ctx.fillStyle = '#333333' // 绘制背景色为#333333的矩阵200*200
+  ctx.fillRect(0, 0, 200, 200) // 左上角坐标(0, 0)开始绘制200*200
+</script>

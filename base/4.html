@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>绘制路径</title>
+</head>
+<body>
+  <canvas id="canvas" width="200" height="200" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
+  console.log(ctx)
+  /*
+  * 1. beginPath() 创建路径起始点
+  * 2. moveTo(x, y) 调用绘制方法去绘制出路径
+  * 3. closePath() 把路径封闭
+  * 4. stroke() fill()...  通过描边或填充路径区域来渲染图形
+  */
+  
+  // 绘制线段
+  ctx.beginPath() // 新建一条路径
+  ctx.moveTo(0, 0) // 起点
+  ctx.lineTo(100, 100) // 闭合路径。会拉一条从当前点到path起始点的直线。如果当前点与起始点重合，则什么都不做
+  ctx.closePath() // 路径封闭
+  ctx.stroke() // 画线
+
+  // 绘制三角形
+  ctx.beginPath()
+  ctx.moveTo(50, 50)
+  ctx.lineTo(150, 50)
+  ctx.lineTo(150, 150)
+  ctx.closePath()
+  ctx.stroke() // 画线
+  ctx.fill() // 填充
+</script>

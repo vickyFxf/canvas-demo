@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动画</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  // var canvas = document.getElementById('canvas')
+  // var ctx = canvas.getContext('2d')
+
+  /*
+  * 动画步骤
+  * 清空 再绘制每一帧动画之前，需要清空所有
+  * 保存 如果在绘制的过程中会更改 canvas 的状态(颜色、移动了坐标原点等),又在绘制每一帧时都是原始状态的话，则最好保存下 canvas 的状态
+  * 绘制动画图形 这一步才是真正的绘制动画帧
+  * 恢复 canvas状态如果你前面保存了 canvas 状态，则应该在绘制完成一帧之后恢复 canvas 状态
+  */
+
+  /*
+  * 控制动画
+  * setInterval
+  * setTimeout
+  * requestAnimationFrame 请求动画帧
+  */
+
+  let sun;
+let earth;
+let moon;
+let ctx;
+function init(){
+    sun = new Image();
+    earth = new Image();
+    moon = new Image();
+    sun.src = "./assets/image/sun.png";
+    earth.src = "./assets/image/earth.png";
+    moon.src = "./assets/image/moon.png";
+ 
+    var canvas = document.getElementById('canvas')
+    ctx = canvas.getContext('2d')
+ 
+    sun.onload = function (){
+        draw()
+    }
+ 
+}
+init();
+function draw(){
+    ctx.clearRect(0, 0, 400, 400); //清空所有的内容
+    /*绘制 太阳*/
+    ctx.drawImage(sun, 180, 180, 40, 40);
+ 
+    ctx.save(); // 保存状态
+    ctx.translate(200, 200);
+ 
+    //绘制earth轨道
+    ctx.beginPath();
+    ctx.strokeStyle = "red";
+    ctx.arc(0, 0, 150, 0, 2 * Math.PI)
+    ctx.stroke()
+ 
+    let time = new Date();
+    //绘制地球
+    ctx.rotate(2 * Math.PI / 60 * time.getSeconds() + 2 * Math.PI / 60000 * time.getMilliseconds())
+    ctx.translate(150, 0);
+    ctx.drawImage(earth, -12, -12, 20, 20)
+ 
+    //绘制月球轨道
+    ctx.beginPath();
+    ctx.strokeStyle = "blue";
+    ctx.arc(0, 0, 40, 0, 2 * Math.PI);
+    ctx.stroke();
+ 
+    //绘制月球
+    ctx.rotate(2 * Math.PI / 6 * time.getSeconds() + 2 * Math.PI / 6000 * time.getMilliseconds());
+    ctx.translate(40, 0);
+    ctx.drawImage(moon, -3.5, -3.5, 10, 10);
+    ctx.restore(); // 清除状态
+ 
+    requestAnimationFrame(draw);
+}
+</script>

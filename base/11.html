@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>变换</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
+
+  /*
+  * translate 平移canvas的坐标原点
+  * rotate 旋转，单位弧度
+  * scale 缩放
+  * transform 变形
+  * 最好在最变换前，现保存好状态
+  */
+  ctx.save()
+  ctx.translate(100, 100) // 将坐标原点移动到(100, 100)
+  ctx.strokeRect(20, 20, 100, 100) // 相对刚刚(100, 100)设置起始点为(20, 20)
+  ctx.save()
+  ctx.translate(100, 100)
+  ctx.rotate(Math.PI / 180 * 45) // canvas x轴旋转45度
+  ctx.scale(1.1, 1)
+  ctx.strokeRect(100, 100, 50, 50)
+</script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>添加文本</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
+  /*
+  * fillText(text, x, y [, maxWidth]) 在指定的 (x,y) 位置填充指定的文本，绘制的最大宽度是可选的。
+  * strokeText(text, x, y [, maxWidth]) 在指定的 (x,y) 位置绘制文本边框，绘制的最大宽度是可选的。
+  */
+  ctx.font = '100px sans-serif' // 设置文字大小 字体
+  ctx.textAlign = 'left' // 设置文本对齐方式 默认start
+  ctx.textBaseline = 'bottom' // 设置文本基线对齐方式
+  ctx.direction = 'rtl' // 设置文本方向 ltr rtl inherit
+  ctx.fillText('vicky', 100, 100)
+  ctx.strokeText('vicky', 100, 200)
+  ctx.stroke()
+</script>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>合成</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400" style="border: 1px solid #000"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
+
+  /*
+  * globalCompositeOperation 合成
+  * source-over 全局合成
+  * 
+  */
+  ctx.fillStyle = 'blue'
+  ctx.fillRect(0, 0, 200, 200)
+
+  // ctx.globalCompositeOperation = 'source-over' // 全局合成操作
+  // ctx.globalCompositeOperation = 'source-in' // 新图像和老图像重合部分
+  // ctx.globalCompositeOperation = 'source-out' // 新图像没有被重合部分
+  // ctx.globalCompositeOperation = 'source-atop' // 老图像完整显示，新图像只显示重合部分
+  // ctx.globalCompositeOperation = 'destination-over' // 新图像在老图像下面
+  // ctx.globalCompositeOperation = 'destination-in' // 只显示老图像重合部分
+  // ctx.globalCompositeOperation = 'destination-out' // 只显示老图像没有被重合部分
+  // ctx.globalCompositeOperation = 'destination-atop' // 显示新图像，重叠部分显示老图像
+  // ctx.globalCompositeOperation = 'lighter' // 重叠部分显示高亮 这个颜色根据蓝+红=紫
+  // ctx.globalCompositeOperation = 'darken' // 重叠部分显示黑色
+  // ctx.globalCompositeOperation = 'xor' // 重叠部分透明
+  ctx.globalCompositeOperation = 'copy' // 只有新图像会被保留
+  ctx.fillStyle = 'red'
+  ctx.fillRect(100, 100, 200, 200)
+</script>
